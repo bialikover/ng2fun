@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var five = require("johnny-five");
 var board = new five.Board();
 
+/*
 board.on("ready", function() {
 	var proximity = new five.Proximity({
 		controller: "HCSR04",
@@ -27,12 +28,14 @@ board.on("ready", function() {
 		});
 	});
 });
-
+*/
 app.use('/assets', express.static('assets'));
+app.use('/src', express.static('src'));
+app.use('/node_modules', express.static('node_modules'));
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/src/index.html');
 });
