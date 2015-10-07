@@ -12,7 +12,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var angular2_1 = require('angular2/angular2');
 var Sense8Component = (function () {
     function Sense8Component() {
-        this.color = 'background-color:#1B63A1';
+        this.imageSrc = "/assets/img/ng.jpg";
+        this.color = "#fff";
     }
     Sense8Component.prototype.onInit = function () {
         var _this = this;
@@ -23,37 +24,40 @@ var Sense8Component = (function () {
         });
         io.on('sense', function (value) {
             console.log(value);
-            //changeColor(circle, value);
-            _this.color = 'background-color:' + _this.getColor(value);
+            //changeimageSrc(circle, value);
+            _this.imageSrc = _this.getimageSrc(value);
         });
     };
-    Sense8Component.prototype.getColor = function (value) {
+    Sense8Component.prototype.getimageSrc = function (value) {
         if (value <= 20) {
-            return "#1B63A1"; //azul
+            this.color = "background:red";
+            return "/assets/img/wb1.jpg";
         }
         else if (value > 20 && value <= 40) {
-            return "#26C649"; //verde
+            this.color = "background:blue";
+            return "/assets/img/wb2.jpg";
         }
         else if (value > 40 && value <= 60) {
-            return "#F3D648"; //amarillo
+            this.color = "background:yellow";
+            return "/assets/img/wb3.jpg";
         }
         else if (value > 60 && value <= 80) {
-            return "#E8880F"; //naranja
+            this.color = "background:green";
+            return "/assets/img/wb4.jpg";
         }
         else if (value > 80 && value <= 100) {
-            return "#E80F0F"; //rojo
+            this.color = "background:#feb155";
+            return "/assets/img/wb5.jpg";
         }
         else {
-            return "#000"; //rojo
+            this.color = "background:purple";
+            return "/assets/img/wb6.jpg";
         }
-    };
-    Sense8Component.prototype.randomize = function () {
-        return Math.floor((Math.random() * 100) + 1);
     };
     Sense8Component = __decorate([
         angular2_1.Component({ selector: 'sense8' }),
         angular2_1.View({
-            template: "\n        <div id=\"circle\" [attr.style]=\"color\"></div>\n    "
+            template: "\n        <img  [attr.src]=\"imageSrc\" class=\"border\" [attr.alt]=\"imageSrc\"  [attr.style]=\"color\" />\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], Sense8Component);
@@ -61,31 +65,4 @@ var Sense8Component = (function () {
 })();
 exports.Sense8Component = Sense8Component;
 angular2_1.bootstrap(Sense8Component);
-/*
-
-function changeColor(element, value) {
-    element.style.backgroundColor = getColor(value);
-}
-
-function getColor(value) {
-    if (value <= 20) {
-        return "#1B63A1"; //azul
-    }
-    else if (value > 20 && value <= 40) {
-        return "#26C649"; //verde
-    }
-    else if (value > 40 && value <= 60) {
-        return "#F3D648"; //amarillo
-    }
-    else if (value > 60 && value <= 80) {
-        return "#E8880F"; //naranja
-    }
-    else if (value > 80 && value <= 100) {
-        return "#E80F0F"; //rojo
-    } else {
-        return "#000"; //rojo
-    }
-
-}
-*/ 
 //# sourceMappingURL=bootstrap.js.map

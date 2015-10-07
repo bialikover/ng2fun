@@ -3,12 +3,13 @@ import {bootstrap, Component, View, OnInit} from 'angular2/angular2';
 @Component({ selector: 'sense8' })
 @View({
     template: `
-        <div id="circle" [attr.style]="color"></div>
+        <img  [attr.src]="imageSrc" class="border" [attr.alt]="imageSrc"  [attr.style]="color" />
     `
 })
 export class Sense8Component implements OnInit {
 
-    public color = 'background-color:#1B63A1';
+    public imageSrc : string = "/assets/img/ng.jpg";
+    public color : string = "#fff";
 
     onInit() {
         var io = window.io();
@@ -20,63 +21,36 @@ export class Sense8Component implements OnInit {
 
         io.on('sense', (value: any) => {
             console.log(value);
-            //changeColor(circle, value);
-            this.color = 'background-color:' + this.getColor(value);
+            //changeimageSrc(circle, value);
+            this.imageSrc = this.getimageSrc(value);
         });
 
-        
     }
 
-    getColor(value: number) {
+    getimageSrc(value: number) {
         if (value <= 20) {
-            return "#1B63A1"; //azul
+            this.color ="background:red";
+            return "/assets/img/wb1.jpg";
         }
         else if (value > 20 && value <= 40) {
-            return "#26C649"; //verde
+            this.color ="background:blue";
+            return "/assets/img/wb2.jpg";
         }
         else if (value > 40 && value <= 60) {
-            return "#F3D648"; //amarillo
+            this.color ="background:yellow";
+            return "/assets/img/wb3.jpg";
         }
         else if (value > 60 && value <= 80) {
-            return "#E8880F"; //naranja
+            this.color ="background:green";
+            return "/assets/img/wb4.jpg";
         }
         else if (value > 80 && value <= 100) {
-            return "#E80F0F"; //rojo
+            this.color ="background:#feb155";
+            return "/assets/img/wb5.jpg";
         } else {
-            return "#000"; //rojo
+            this.color ="background:purple";
+            return "/assets/img/wb6.jpg";
         }
-    }
-
-    randomize() {
-        return Math.floor((Math.random() * 100) + 1);
     }
 }
 bootstrap(Sense8Component);
-
-/*
-
-function changeColor(element, value) {
-    element.style.backgroundColor = getColor(value);
-}
-
-function getColor(value) {
-    if (value <= 20) {
-        return "#1B63A1"; //azul
-    }
-    else if (value > 20 && value <= 40) {
-        return "#26C649"; //verde
-    }
-    else if (value > 40 && value <= 60) {
-        return "#F3D648"; //amarillo
-    }
-    else if (value > 60 && value <= 80) {
-        return "#E8880F"; //naranja
-    }
-    else if (value > 80 && value <= 100) {
-        return "#E80F0F"; //rojo
-    } else {
-        return "#000"; //rojo
-    }
-
-}
-*/
