@@ -16,11 +16,16 @@ var Sense8Component = (function () {
     }
     Sense8Component.prototype.onInit = function () {
         var _this = this;
-        setInterval(function () {
-            console.log(_this.getColor(_this.randomize()));
-            _this.color = 'background-color:' + _this.getColor(_this.randomize());
-            console.log(_this.color);
-        }, 1000);
+        var io = window.io();
+        var circle = document.getElementById('circle');
+        io.on('connection', function (socket) {
+            console.log('a user connected');
+        });
+        io.on('sense', function (value) {
+            console.log(value);
+            //changeColor(circle, value);
+            _this.color = 'background-color:' + _this.getColor(value);
+        });
     };
     Sense8Component.prototype.getColor = function (value) {
         if (value <= 20) {
@@ -56,4 +61,31 @@ var Sense8Component = (function () {
 })();
 exports.Sense8Component = Sense8Component;
 angular2_1.bootstrap(Sense8Component);
+/*
+
+function changeColor(element, value) {
+    element.style.backgroundColor = getColor(value);
+}
+
+function getColor(value) {
+    if (value <= 20) {
+        return "#1B63A1"; //azul
+    }
+    else if (value > 20 && value <= 40) {
+        return "#26C649"; //verde
+    }
+    else if (value > 40 && value <= 60) {
+        return "#F3D648"; //amarillo
+    }
+    else if (value > 60 && value <= 80) {
+        return "#E8880F"; //naranja
+    }
+    else if (value > 80 && value <= 100) {
+        return "#E80F0F"; //rojo
+    } else {
+        return "#000"; //rojo
+    }
+
+}
+*/ 
 //# sourceMappingURL=bootstrap.js.map
