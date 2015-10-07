@@ -49,7 +49,7 @@ export class Sense8Component implements OnInit {
             return "/assets/img/wb5.jpg";
         } else {
             this.color ="background:purple";
-            return "/assets/img/wb6.jpg";
+            return "/assets/img/ng.jpg";
         }
     }
 }

@@ -51,7 +51,7 @@ var Sense8Component = (function () {
         }
         else {
             this.color = "background:purple";
-            return "/assets/img/wb6.jpg";
+            return "/assets/img/ng.jpg";
         }
     };
     Sense8Component = __decorate([
